@@ -1,0 +1,692 @@
+{
+	"info": {
+		"_postman_id": "c2375c39-0810-4748-b34a-2cedee857979",
+		"name": "Log Lookup System",
+		"description": "Due to system delay on indexing the file, Please run the 15000000 rows test manually if you will.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28203231"
+	},
+	"item": [
+		{
+			"name": "Create 100 Rows",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/manage/generate?filename=test.log&lines=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"manage",
+						"generate"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "test.log"
+						},
+						{
+							"key": "lines",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lookup 10 Rows",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseBody = pm.response.json();",
+							"",
+							"pm.test(\"Response body has an array of 10 elements\", function () {",
+							"    pm.expect(Array.isArray(responseBody)).to.be.true;",
+							"    pm.expect(responseBody.length).to.equal(10);",
+							"});",
+							"",
+							"",
+							"pm.test(\"First response should be the row 100\", function () {",
+							"    pm.expect(responseBody[0]).to.include(\"[100]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/keyword?keyword=delicious&lastN=10&filename=test.log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"keyword"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "delicious"
+						},
+						{
+							"key": "lastN",
+							"value": "10"
+						},
+						{
+							"key": "filename",
+							"value": "test.log"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Append 100 Rows",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/manage/append?filename=test.log&lines=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"manage",
+						"append"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "test.log"
+						},
+						{
+							"key": "lines",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lookup 150 Rows",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseBody = pm.response.json();",
+							"",
+							"pm.test(\"Response body has an array of 150 elements\", function () {",
+							"    pm.expect(Array.isArray(responseBody)).to.be.true;",
+							"    pm.expect(responseBody.length).to.equal(150);",
+							"});",
+							"",
+							"",
+							"pm.test(\"First response should be the row 200\", function () {",
+							"    pm.expect(responseBody[0]).to.include(\"[200]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/keyword?keyword=delicious&lastN=150&filename=test.log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"keyword"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "delicious"
+						},
+						{
+							"key": "lastN",
+							"value": "150"
+						},
+						{
+							"key": "filename",
+							"value": "test.log"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lookup First Row",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseBody = pm.response.json();",
+							"",
+							"pm.test(\"Response body has an array of 1 elements\", function () {",
+							"    pm.expect(Array.isArray(responseBody)).to.be.true;",
+							"    pm.expect(responseBody.length).to.equal(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"First response should be the row 1\", function () {",
+							"    pm.expect(responseBody[0]).to.include(\"[1]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/keyword?keyword=%5B1%5D&lastN=150&filename=test.log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"keyword"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "%5B1%5D"
+						},
+						{
+							"key": "lastN",
+							"value": "150"
+						},
+						{
+							"key": "filename",
+							"value": "test.log"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lookup None Existing Value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseBody = pm.response.json();",
+							"",
+							"pm.test(\"Response body has an array of 0 elements\", function () {",
+							"    pm.expect(Array.isArray(responseBody)).to.be.true;",
+							"    pm.expect(responseBody.length).to.equal(0);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/keyword?keyword=None&lastN=150&filename=test.log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"keyword"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "None"
+						},
+						{
+							"key": "lastN",
+							"value": "150"
+						},
+						{
+							"key": "filename",
+							"value": "test.log"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create 15000000 Rows",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/manage/generate?filename=huge.log&lines=15000000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"manage",
+						"generate"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "huge.log"
+						},
+						{
+							"key": "lines",
+							"value": "15000000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lookup 10 Rows [15000000]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseBody = pm.response.json();",
+							"",
+							"pm.test(\"Response body has an array of 10 elements\", function () {",
+							"    pm.expect(Array.isArray(responseBody)).to.be.true;",
+							"    pm.expect(responseBody.length).to.equal(10);",
+							"});",
+							"",
+							"",
+							"pm.test(\"First response should be the row 15000000\", function () {",
+							"    pm.expect(responseBody[0]).to.include(\"[15000000]\");",
+							"});",
+							"",
+							"console.log(\"This file should be around 1.2GB\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/keyword?keyword=delicious&lastN=10&filename=huge.log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"keyword"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "delicious"
+						},
+						{
+							"key": "lastN",
+							"value": "10"
+						},
+						{
+							"key": "filename",
+							"value": "huge.log"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Append 10000 Rows Copy [15000000]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/manage/append?filename=huge.log&lines=10000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"manage",
+						"append"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "huge.log"
+						},
+						{
+							"key": "lines",
+							"value": "10000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lookup 10 Rows [15010000]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"var responseBody = pm.response.json();",
+							"",
+							"pm.test(\"Response body has an array of 10 elements\", function () {",
+							"    pm.expect(Array.isArray(responseBody)).to.be.true;",
+							"    pm.expect(responseBody.length).to.equal(10);",
+							"});",
+							"",
+							"",
+							"pm.test(\"First response should be the row 15010000\", function () {",
+							"    pm.expect(responseBody[0]).to.include(\"[15010000]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"setTimeout(function() {",
+							"    // Continue with the request",
+							"    pm.sendRequest();",
+							"}, 3000);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/keyword?keyword=delicious&lastN=10&filename=huge.log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"keyword"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "delicious"
+						},
+						{
+							"key": "lastN",
+							"value": "10"
+						},
+						{
+							"key": "filename",
+							"value": "huge.log"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lookup 1000 Random Rows [15010000] Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseBody = pm.response.json();",
+							"",
+							"pm.test(\"Response body has an array of 1000 elements\", function () {",
+							"    pm.expect(Array.isArray(responseBody)).to.be.true;",
+							"    pm.expect(responseBody.length).to.equal(1000);",
+							"});",
+							"",
+							"",
+							"pm.test(\"First response should be the row 15010000\", function () {",
+							"    pm.expect(responseBody[0]).to.include(\"orange\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/keyword?keyword=orange&lastN=1000&filename=huge.log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"keyword"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "orange"
+						},
+						{
+							"key": "lastN",
+							"value": "1000"
+						},
+						{
+							"key": "filename",
+							"value": "huge.log"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lookup First Row [for latency test purpose]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseBody = pm.response.json();",
+							"",
+							"pm.test(\"Response body has an array of 1 elements\", function () {",
+							"    pm.expect(Array.isArray(responseBody)).to.be.true;",
+							"    pm.expect(responseBody.length).to.equal(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"First response should be the row 1\", function () {",
+							"    pm.expect(responseBody[0]).to.include(\"[1]\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/keyword?keyword=%5B1%5D&lastN=150&filename=huge.log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"keyword"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "%5B1%5D"
+						},
+						{
+							"key": "lastN",
+							"value": "150"
+						},
+						{
+							"key": "filename",
+							"value": "huge.log"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lookup None Existing Value [for latency test purpose]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseBody = pm.response.json();",
+							"",
+							"pm.test(\"Response body has an array of 0 elements\", function () {",
+							"    pm.expect(Array.isArray(responseBody)).to.be.true;",
+							"    pm.expect(responseBody.length).to.equal(0);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/keyword?keyword=None&lastN=150&filename=huge.log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"keyword"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "None"
+						},
+						{
+							"key": "lastN",
+							"value": "150"
+						},
+						{
+							"key": "filename",
+							"value": "huge.log"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
