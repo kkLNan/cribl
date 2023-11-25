@@ -206,7 +206,7 @@ public class LogFileIndexer {
                     position++;
 
                     if (b == '\n') {
-                        indexWriter.write(lineStart + "\n");
+                        indexWriter.write(position + "\n");
                         lineStart = position;
                         currentPositions.add(lineStart);
                     }
@@ -218,7 +218,6 @@ public class LogFileIndexer {
             if (lineStart != position) {
                 indexWriter.write(lineStart + "\n");
             }
-            indexWriter.write(logFile.length() + "\n");
 
             indexMap.put(logFilePath, currentPositions);
         }
